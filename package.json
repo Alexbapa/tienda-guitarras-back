@@ -1,0 +1,24 @@
+{
+  "name": "back",
+  "version": "1.0.0",
+  "description": "back de guitarras",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon index",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alexbapa/tienda-guitarras-back.git"
+  },
+  "author": "tulio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alexbapa/tienda-guitarras-back/issues"
+  },
+  "homepage": "https://github.com/Alexbapa/tienda-guitarras-back#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20"
+  }
+}
