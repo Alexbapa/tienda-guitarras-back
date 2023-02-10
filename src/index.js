@@ -6,14 +6,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const {dbConnection} = require('./config/db');
+const { dbConnection } = require('./config/db');
 dbConnection();
-app.listen(process.env.PORT,()=>{
-console.log('se levanto la api');
+app.listen(process.env.PORT, () => {
+   console.log('se levanto la api' + process.env.PORT);
 }
 )
 //localhost:5000/
-app.get('/',(req,res) =>{
+app.get('/', (req, res) => {
    res.send('estoy en inicio')
 })
 //collections
