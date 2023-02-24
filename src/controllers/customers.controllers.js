@@ -2,6 +2,7 @@ const Customer = require('./../models/customersSchema');
 const { respApi } = require('../helpers/helpers');
 const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
+
 require('dotenv').config();
 
 
@@ -12,28 +13,23 @@ const getCustomers = async (req, res) => {
 
 const createCustomers = async (req, res) => {
     const { name, email, password } = req.body
-
     try {
         //generar aleatorio
         const salt = await bcryptjs.genSalt(10)
         const hashedPassword = await bcryptjs.hash(password, salt)
-
         //crear usuario con pass encriptado
         const respuestaBD = await Customer.create({
             name,
             email,
             password: hashedPassword,
         })
-
         //crear el jsonwebtoken
         const payload = {
             user: {
                 id: respuestaBD._id,
             },
         }
-
         //firmar el jwtoken
-
         jwt.sign(
             payload,
             process.env.SECRET,
@@ -42,34 +38,28 @@ const createCustomers = async (req, res) => {
             },
             (error, token) => {
                 if (error) throw error
-                res.json(respuestaBD)
+                //  respApi(res, 'exito', respuestaBD);
+                res.json({ token })
             }
-
-
         )
-
-
-        respApi(res, 'exito', CustomerNew);
+        
+        // respApi(res, 'exito', tokenNew);
     } catch (error) {
         return res.status(400).json({
             msg: error,
         }
         )
     }
-
 }
 
 const updateCustomers = async (req, res) => {
-
     try {
         const id = req.params.id;
         const updatedData = req.body;
         const options = { new: true };
-
         const CustomerUpdate = await Customer.findByIdAndUpdate(
             id, updatedData, options
         )
-
         respApi(res, 'exito', CustomerUpdate);
     }
     catch (error) {

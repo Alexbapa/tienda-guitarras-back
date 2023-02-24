@@ -1,8 +1,9 @@
 const {Router} = require('express');
 const router = Router();
 const {getCustomers, createCustomers, updateCustomers, deleteCustomers} = require('../controllers/customers.controllers');
+const auth = require('../middelwares/auth');
 
-router.get('/', getCustomers);
+router.get('/', auth , getCustomers);
 
 router.post('/', createCustomers);
 
